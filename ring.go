@@ -28,6 +28,24 @@ func (r *Ring) SetCapacity(size int) {
 	r.extend(size)
 }
 
+func (r *Ring) Length() int {
+
+	res := 0
+
+	if r.head < 0 {
+		return 0
+	}
+
+	if r.head > r.tail {
+		res = r.head - r.tail + 1
+	} else if r.head < r.tail {
+		// fmt.Println("head", r.head)
+		// fmt.Println("tail", r.tail)
+		res = r.head + len(r.buff) - r.tail + 1
+	}
+	return res
+}
+
 /*
 Capacity returns the current capacity of the ring buffer.
 */
